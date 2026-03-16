@@ -1,5 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { getUser } from '$lib/db.server';
+import { signJwt } from '$lib/jwt.server';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ locals }) => {
@@ -25,8 +26,13 @@ export const actions: Actions = {
 			return fail(400, { error: 'Invalid username or password' });
 		}
 
-		// Set the session cookie (In a real app, use a secure random token, not the username!)
-		cookies.set('session', user.username, {
+		// Set the session cookie using a JWT for enhanced security (and to demonstrate decoding stolen JWTs)
+		const token = signJwt({
+			username: user.username,
+			role: user.username === 'admin' ? 'admin' : 'user'
+		});
+
+		cookies.set('session', token, {
 			path: '/',
 			httpOnly: false, // Intentional: allowing JS to read the cookie for XSS demo purposes
 			sameSite: 'lax',
