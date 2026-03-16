@@ -19,7 +19,7 @@
 	>
 		<h1 class="mb-6 text-2xl font-semibold tracking-tight text-zinc-900">Search Platform</h1>
 
-		<form action="/search" method="GET" class="mb-8 flex gap-3">
+		<form action="/search" method="GET" class="mb-8 flex gap-3" data-sveltekit-reload>
 			<input
 				type="text"
 				name="q"
