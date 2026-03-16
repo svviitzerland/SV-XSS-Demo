@@ -48,6 +48,7 @@ bun install
 ```
 
 3. Create a `.env` file in the root directory and add a JWT secret:
+
 ```env
 JWT_SECRET="your-secret-key-here"
 ```
@@ -57,6 +58,16 @@ JWT_SECRET="your-secret-key-here"
 ```bash
 bun run dev
 ```
+
+### Using Docker
+
+If you prefer not to install dependencies locally, you can run the pre-built Docker image directly:
+
+```bash
+docker run -d -p 3000:3000 --env JWT_SECRET="your-secret-key-here" svviitzerland/sv-xss-demo
+```
+
+The application will be accessible at `http://localhost:3000`.
 
 ### Demo Accounts
 
